@@ -1,0 +1,120 @@
+<div class="app">
+  
+  <aside class="app-aside app-aside-expand-md app-aside-light">
+  </aside>
+  <main class="app-main">
+    <!-- .wrapper -->
+    <div class="wrapper">
+      <!-- .page -->
+      <div class="page">
+        <!-- .page-inner -->
+        <div class="page-inner">
+          <!-- .page-title-bar -->
+          <header class="page-title-bar">
+            <div class="d-flex flex-column flex-md-row">
+              <p class="lead">
+                <span class="font-weight-bold">Hi, {{fullname}}.</span>
+              </p>
+              <div class="ml-auto">
+               
+                <!-- .dropdown -->
+                <div class="dropdown">
+                  <select class="custom-select" id="attendanceType" name="attendanceType" (change)="filterAttendance()"
+                    [(ngModel)]="filter.filterType">
+                    <option *ngFor="let type of filterTypes" [value]="type.value">{{type.name}}
+                    </option>
+                  </select>
+                </div>
+                <div [hidden]="filter.filterType !== 'custom'">
+                  <div class="form-group">
+                    <input placeholder="Select Start Date" [(ngModel)]="filter.fromDate" name="checkIndate"
+                      class="form-control" [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
+                    <owl-date-time #dtPicker1 [firstDayOfWeek]="firstDayofWeek"
+                      [pickerType]="'calendar'"></owl-date-time>
+                    <input placeholder="Select End Date" [(ngModel)]="filter.toDate" name="fromDate"
+                      class="form-control" [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
+                    <owl-date-time #dtPicker2 [firstDayOfWeek]="firstDayofWeek"
+                      [pickerType]="'calendar'"></owl-date-time>
+                    <button class="btn btn-outline-primary form-control" (click)="filterResult()"> Search </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </header>
+
+          <!-- .page-section -->
+          <div class="page-section">
+            <!-- .section-block -->
+            <div class="section-block">
+              <!-- metric row -->
+              <div class="metric-row">
+                <div class="col-lg-9">
+                  <div class="metric-row metric-flush">                    
+                    <div class="col">                
+                      <a class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"><i class="fas fa-users text-danger"></i> Absent </h2>
+                        <p class="metric-value h3">
+                           <span class="value">{{leaveDetail.totalAbsent}}</span>
+                        </p>
+                      </a> 
+                    </div>                     
+                    <div class="col">                         
+                      <a class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"><i class="oi oi-circle-check text-success"></i> Approved </h2>
+                        <p class="metric-value h3">
+                          <span class="value">{{leaveDetail.approved}}</span>
+                        </p>
+                      </a> 
+                    </div>                       
+                    <div class="col">                     
+                      <a class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"><i class="oi oi-media-record text-warning"></i> Pending </h2>
+                        <p class="metric-value h3">
+                            <span class="value">{{leaveDetail.pending}}</span>
+                        </p>
+                      </a> 
+                    </div>
+                    <div class="col">
+                      <a class="metric metric-bordered align-items-center">
+                        <h2 class="metric-label"><span class="oi oi-pulse text-danger"></span> Casual </h2>
+                        <p class="metric-value h3">
+                            <span class="value">{{leaveDetail.casual}}</span>
+                        </p>
+                      </a> 
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <a class="metric metric-bordered align-items-center">
+                    <h2 class="metric-label"><span class="oi oi-calendar text-info"></span> Annual </h2>
+                    <p class="metric-value h3">
+                      <span class="value">{{leaveDetail.annual}}</span>
+                    </p>
+                  </a> 
+                </div>
+              </div>
+            </div><!-- /.section-block -->
+            <!-- grid row -->
+            <div class="row">
+              <!-- grid column -->
+              <div class="card card-fluid">
+                <!-- .card-body -->
+                <div class="card-body">
+                  <!-- example block -->
+                  <div class="el-example">
+                    <button type="button" (click)="checkIn()" class="btn btn-primary float-left">Checkin</button>
+                    <button type="button" (click)="checkOut()" class="btn btn-primary float-left">Checkout</button>
+                    <button type="button" (click)="breakStart()" class="btn btn-primary float-left">Start Break</button>
+                    <button type="button" (click)="breakEnd()" class="btn btn-primary float-left">End Break</button>
+                  </div><!-- /example block -->
+                </div><!-- /.card-body -->
+              </div><!-- /.card -->
+            </div><!-- /grid row -->
+          </div><!-- /.page-section -->
+        </div><!-- /.page-inner -->
+      </div><!-- /.page -->
+    </div><!-- .app-footer -->
+    <!-- /.wrapper -->
+  </main><!-- /.app-main -->
+</div><!-- /.app -->
